@@ -1,0 +1,9 @@
+/build
+bootstrap.*
+classic.json*
+modern.json*
+/modern
+/ext
+/classic
+.idea
+.sencha
