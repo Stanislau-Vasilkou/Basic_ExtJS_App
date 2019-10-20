@@ -1,27 +1,64 @@
-/**
- * This view is an example list of people.
- */
+var menuButt = Ext.create('Ext.Button', {
+	text      : 'Действия',
+	renderTo: Ext.getBody(),
+	alwaysOnTop: true,
+	arrowAlign: 'bottom',
+	menu      : [
+		{text: 'Добавить'},
+		{text: 'Редактировать'},
+		{text: 'Удалить'}
+	]
+});
+
 Ext.define('MyApp.view.main.List', {
-    extend: 'Ext.grid.Panel',
-    xtype: 'mainlist',
+	extend: 'Ext.grid.Panel',
+	xtype: 'mainlist',
 
-    requires: [
-        'MyApp.store.Personnel'
-    ],
+	requires: [
+		'MyApp.store.Table'
+	],
 
-    title: 'Personnel',
+	title: 'Table',
 
-    store: {
-        type: 'personnel'
-    },
+	store: {
+		type: 'table'
+	},
+	plugins: [
+		{ ptype: 'gridfilters'},
+	],
 
-    columns: [
-        { text: 'Name',  dataIndex: 'name' },
-        { text: 'Email', dataIndex: 'email', flex: 1 },
-        { text: 'Phone', dataIndex: 'phone', flex: 1 }
-    ],
+	columns: [
+		{
+			text: 'Number',
+			dataIndex: 'numbercolumn',
+			filter: {
+				type: 'number'
+			}
+		}, {
+			text: 'Date',
+			dataIndex: 'datecolumn',
+			flex: 1,
+			filter: {
+				type: 'date'
+			}
+		}, {
+			xtype: 'checkcolumn',
+			headerCheckbox: true,
+			dataIndex: 'checkcolumn',
+			sortable: false,
+			width: 250,
+			filter: {
+				type: 'boolean'
+			}
+		}
+	],
 
-    listeners: {
-        select: 'onItemSelected'
-    }
+	bbar: {
+		xtype: 'pagingtoolbar',
+		displayInfo: true
+	},
+
+	listeners: {
+		select: 'onItemSelected'
+	}
 });
