@@ -5,7 +5,7 @@
  *
  * TODO - Replace this content of this view to suite the needs of your application.
  */
-Ext.define('BasicExtJSApp.view.main.Main', {
+Ext.define('MyApp.view.main.Main', {
     extend: 'Ext.tab.Panel',
     xtype: 'app-main',
 
@@ -13,9 +13,9 @@ Ext.define('BasicExtJSApp.view.main.Main', {
         'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
 
-        'BasicExtJSApp.view.main.MainController',
-        'BasicExtJSApp.view.main.MainModel',
-        'BasicExtJSApp.view.main.List'
+        'MyApp.view.main.MainController',
+        'MyApp.view.main.MainModel',
+        'MyApp.view.main.List'
     ],
 
     controller: 'main',

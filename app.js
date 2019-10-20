@@ -3,16 +3,16 @@
  * and launch() the Application class.
  */
 Ext.application({
-    extend: 'BasicExtJSApp.Application',
+    extend: 'MyApp.Application',
 
-    name: 'BasicExtJSApp',
+    name: 'MyApp',
 
     requires: [
-        // This will automatically load all classes in the BasicExtJSApp namespace
+        // This will automatically load all classes in the MyApp namespace
         // so that application classes do not need to require each other.
-        'BasicExtJSApp.*'
+        'MyApp.*'
     ],
 
     // The name of the initial view to create.
-    mainView: 'BasicExtJSApp.view.main.Main'
+    mainView: 'MyApp.view.main.Main'
 });
