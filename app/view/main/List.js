@@ -1,15 +1,3 @@
-var menuButt = Ext.create('Ext.Button', {
-	text      : 'Действия',
-	renderTo: Ext.getBody(),
-	alwaysOnTop: true,
-	arrowAlign: 'bottom',
-	menu      : [
-		{text: 'Добавить'},
-		{text: 'Редактировать'},
-		{text: 'Удалить'}
-	]
-});
-
 Ext.define('MyApp.view.main.List', {
 	extend: 'Ext.grid.Panel',
 	xtype: 'mainlist',
@@ -23,8 +11,32 @@ Ext.define('MyApp.view.main.List', {
 	store: {
 		type: 'table'
 	},
+
 	plugins: [
-		{ ptype: 'gridfilters'},
+		{ptype: 'gridfilters'},
+	],
+
+	tbar: [{
+		xtype: 'button',
+		text: 'Action',
+		menu      : [
+			{text: 'Item 1'},
+			{text: 'Item 2'},
+			{text: 'Item 3'},
+			{text: 'Item 4'}
+		]
+	},
+	// 	xtype: 'button',
+	// 	text: 'Add',
+	// 	// fireEvent: 'showModal',
+	// 	handler:  'showModal',
+	// }, {
+	// 	xtype: 'button',
+	// 	text: 'Edit'
+	// }, {
+	// 	xtype: 'button',
+	// 	text: 'Delete'
+	// }
 	],
 
 	columns: [
@@ -46,10 +58,7 @@ Ext.define('MyApp.view.main.List', {
 			headerCheckbox: true,
 			dataIndex: 'checkcolumn',
 			sortable: false,
-			width: 250,
-			filter: {
-				type: 'boolean'
-			}
+			width: 250
 		}
 	],
 
@@ -57,8 +66,4 @@ Ext.define('MyApp.view.main.List', {
 		xtype: 'pagingtoolbar',
 		displayInfo: true
 	},
-
-	listeners: {
-		select: 'onItemSelected'
-	}
 });

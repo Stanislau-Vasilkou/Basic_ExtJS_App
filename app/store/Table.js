@@ -22,6 +22,7 @@ Ext.define('MyApp.store.Table', {
 
     proxy: {
         type: 'memory',
+        enablePaging: true,
         reader: {
             type: 'json',
             rootProperty: 'items'

@@ -7,4 +7,8 @@ Ext.define('MyApp.view.main.MainController', {
 
     alias: 'controller.main',
 
+
+	showModal: function () {
+    Ext.create({xtype: 'modal'}).show()
+	}
 });
