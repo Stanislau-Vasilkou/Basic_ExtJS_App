@@ -21,5 +21,4 @@ Ext.define('MyApp.view.main.Main', {
     items: [{
         xtype: 'mainlist'
     }],
-
 });

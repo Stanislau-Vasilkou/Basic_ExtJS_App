@@ -1,11 +1,7 @@
-/**
- * This class is the controller for the main view for the application. It is specified as
- * the "controller" of the Main view class.
- */
 Ext.define('MyApp.view.main.MainController', {
 	extend: 'Ext.app.ViewController',
 	alias: 'controller.main',
-
+	stores: ['Users'],
 
 	showModal: function () {
 		let vm = this.getViewModel();
@@ -26,8 +22,11 @@ Ext.define('MyApp.view.main.MainController', {
 		}
 	},
 
-	deleteRow: function() {
-		let store = this.getViewModel().getStore('table');
-		console.log(store);
+	deleteRow: function () {
+		let store = this.getViewModel().getStore('Users');
+		let selectedRecord = this.getViewModel().get('selectedRow');
+		let data = store.getData().items;
+		let records = data.filter((i) => i.data.checkcolumn);
+		records.length ? store.remove(records) : store.remove(selectedRecord);
 	},
 });

@@ -2,16 +2,17 @@
  * This class is the view model for the Main view of the application.
  */
 Ext.define('MyApp.view.main.MainModel', {
-    extend: 'Ext.app.ViewModel',
+	extend: 'Ext.app.ViewModel',
 
-    alias: 'viewmodel.main',
-    stores: {
-        Table: {
-            type: 'table'
-        }
-    },
+	alias: 'viewmodel.main',
 
-    data: {
-        name: 'MyApp',
-    }
+	data: {
+		name: 'MyApp',
+	},
+
+	stores: {
+		Users: {
+			type: 'users'
+		}
+	}
 });
