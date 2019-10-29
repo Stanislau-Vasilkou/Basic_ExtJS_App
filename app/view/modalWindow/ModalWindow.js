@@ -31,57 +31,66 @@ Ext.define('MyApp.view.modalWindow.ModalWindow', {
 	items: [
 		{
 			xtype: 'textfield',
+			fieldLabel: 'name',
 			flex: 1,
+			allowBlank: false,
 			bind: {
-				value: '{editedRow.numbercolumn}'
-			},
-			allowBlank: false
+				value: '{editedRow.name}'
+			}
 		}, {
 			xtype: 'combobox',
+			fieldLabel: 'region',
 			valueField: 'abbr',
 			displayField: 'name',
 			queryMode: 'local',
 			store: regions,
+			allowBlank: false,
 			bind: {
 				value: '{editedRow.region}'
-			},
-			allowBlank: false
+			}
 		}, {
 			xtype: 'tagfield',
+			fieldLabel: 'skills',
 			anchor: '100%',
 			displayField: 'skill',
 			valueField: 'id',
 			store: skills,
+			allowBlank: false,
 			bind: {
 				value: '{editedRow.skills}'
 			},
-			allowBlank: false
+			convert: function () {
+
+			}
 		}, {
 			xtype: 'numberfield',
+			fieldLabel: '№',
+			hideTrigger: true,
+			allowBlank: false,
 			bind: {
 				value: '{editedRow.numbercolumn}'
-			},
-			hideTrigger: true,
-			allowBlank: false
+			}
 		}, {
 			xtype: 'container',
 			layout: {
-				type: 'hbox'
+				type: 'hbox',
 			},
 			items: [{
 				xtype: 'datefield',
+				fieldLabel: 'date',
 				format: 'Y-m-d',
+				allowBlank: false,
 				bind: {
 					value: '{editedRow.datecolumn}'
-				},
-				allowBlank: false
+				}
 			}, {
 				xtype: 'timefield',
+				fieldLabel: 'time',
 				format: 'g:i:s',
+				allowBlank: false,
 				bind: {
 					value: '{editedRow.timecolumn}'
-				},
-				allowBlank: false,
+				}
 			}]
 		}, {
 			xtype: 'button',

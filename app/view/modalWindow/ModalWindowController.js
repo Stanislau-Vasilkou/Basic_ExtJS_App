@@ -15,16 +15,16 @@ Ext.define('MyApp.view.modalWindow.ModalWindowController', {
 		}
 	},
 
-
 	saveEditedData: function () {
 		let vm = this.getViewModel();
-		let selectedData = vm.get('selectedRow');
-		let editedData = vm.get('editedRow');
-		let time = Ext.Date.format(editedData['timecolumn'], 'g:i:s');
-		let date = Ext.Date.format(editedData['datecolumn'], 'Y-m-d');
-		let fullDate = new Date(`${date} ${time}`);
-		selectedData.set('datecolumn', fullDate);
-		selectedData.set('numbercolumn', editedData['numbercolumn']);
+		// let selectedData = vm.get('selectedRow');
+		// let editedData = vm.get('editedRow');
+		// let time = Ext.Date.format(editedData['timecolumn'], 'g:i:s');
+		// let date = Ext.Date.format(editedData['datecolumn'], 'Y-m-d');
+		// let fullDate = new Date(`${date} ${time}`);
+		// selectedData.set('datecolumn', fullDate);
+		// selectedData.set('numbercolumn', editedData['numbercolumn']);
+		console.log(vm);
 		this.getView().close();
 	}
 });

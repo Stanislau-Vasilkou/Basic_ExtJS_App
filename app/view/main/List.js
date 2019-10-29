@@ -23,7 +23,7 @@ Ext.define('Users', {
 	pageSize: 5,
 	data: {
 		items: [
-			{name: 'Ivan', region: 'RU', skills: 'JS, Angular, React', numbercolumn: 1, datecolumn: getRandomDate(), checkcolumn: false},
+			{name: 'Ivan', region: 'Russia', skills: [1, 2, 3], numbercolumn: 1, datecolumn: getRandomDate(), checkcolumn: false},
 			{name: 'Petr', region: 'Ukraine', skills: 'JS, Angular, React', numbercolumn: 2, datecolumn: getRandomDate(), checkcolumn: false},
 			{name: 'Fedor', region: 'Russia', skills: 'JS, Angular, React', numbercolumn: 3, datecolumn: getRandomDate(), checkcolumn: false},
 			{name: 'Michael', region: 'Russia', skills: 'JS, Angular, React', numbercolumn: 4, datecolumn: getRandomDate(), checkcolumn: false},
@@ -82,13 +82,14 @@ Ext.define('MyApp.view.main.List', {
 		menu: [
 			{
 				text: 'Добавить',
+				handler: 'showAddModal'
 			},
 			{
 				text: 'Редактировать',
 				bind: {
 					disabled: '{!myGrid.selection}',
 				},
-				handler: 'showModal'
+				handler: 'showEditModal'
 			},
 			{
 				text: 'Удалить',
@@ -96,7 +97,7 @@ Ext.define('MyApp.view.main.List', {
 				bind: {
 					disabled: '{!myGrid.selection}',
 				},
-				handler: 'deleteRow'
+				handler: 'deleteItems'
 			}
 		]
 	}],
