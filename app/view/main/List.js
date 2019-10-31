@@ -3,14 +3,18 @@ function getRandomDate() {
 	return randomDate;
 }
 
+function convertTag(val) {
+	return val.join(', ');
+}
+
 Ext.define('User', {
 	extend: 'Ext.data.Model',
 
 	fields: [
 		{name: 'name', type: 'string'},
 		{name: 'region', type: 'string'},
-		{name: 'skills', type: 'string'},
-		{name: 'numbercolumn', type: 'number'},
+		{name: 'skills', type: 'string', convert: convertTag},
+		{name: 'salary', type: 'number'},
 		{name: 'datecolumn', type: 'date'},
 		{name: 'checkcolumn', type: 'boolean'}
 	]
@@ -23,17 +27,17 @@ Ext.define('Users', {
 	pageSize: 5,
 	data: {
 		items: [
-			{name: 'Ivan', region: 'Russia', skills: [1, 2, 3], numbercolumn: 1, datecolumn: getRandomDate(), checkcolumn: false},
-			{name: 'Petr', region: 'Ukraine', skills: 'JS, Angular, React', numbercolumn: 2, datecolumn: getRandomDate(), checkcolumn: false},
-			{name: 'Fedor', region: 'Russia', skills: 'JS, Angular, React', numbercolumn: 3, datecolumn: getRandomDate(), checkcolumn: false},
-			{name: 'Michael', region: 'Russia', skills: 'JS, Angular, React', numbercolumn: 4, datecolumn: getRandomDate(), checkcolumn: false},
-			{name: 'Jan', region: 'Russia', skills: 'JS, Angular, React', numbercolumn: 5, datecolumn: getRandomDate(), checkcolumn: false},
-			{name: 'Alex', region: 'Belarus', skills: 'JS, Angular, React', numbercolumn: 6, datecolumn: getRandomDate(), checkcolumn: false},
-			{name: 'Ales', region: 'Belarus', skills: 'JS, Angular, React', numbercolumn: 7, datecolumn: getRandomDate(), checkcolumn: false},
-			{name: 'Stas', region: 'Belarus', skills: 'JS, Angular, React', numbercolumn: 8, datecolumn: getRandomDate(), checkcolumn: false},
-			{name: 'Sergey', region: 'Russia', skills: 'JS, Angular, React', numbercolumn: 9, datecolumn: getRandomDate(), checkcolumn: false},
-			{name: 'Kirill', region: 'Russia', skills: 'JS, Angular, React', numbercolumn: 10, datecolumn: getRandomDate(), checkcolumn: false},
-			{name: 'Fillip', region: 'Ukraine', skills: 'JS, Angular, React', numbercolumn: 11, datecolumn: getRandomDate(), checkcolumn: false},
+			{name: 'Ivan', region: 'Россия', skills: ['.NET'], salary: 300, datecolumn: getRandomDate(), checkcolumn: false},
+			{name: 'Petr', region: 'Украина', skills: ['Java', '.NET'], salary: 200, datecolumn: getRandomDate(), checkcolumn: false},
+			{name: 'Fedor', region: 'Россия', skills: ['JavaScript', 'Swift'], salary: 350, datecolumn: getRandomDate(), checkcolumn: false},
+			{name: 'Michael', region: 'Россия', skills: ['JavaScript', 'Java'], salary: 400, datecolumn: getRandomDate(), checkcolumn: false},
+			// {name: 'Jan', region: 'Россия', skills: [1, 3], salary: 5, datecolumn: getRandomDate(), checkcolumn: false},
+			// {name: 'Alex', region: 'Беларусь', skills: [1, 3], salary: 6, datecolumn: getRandomDate(), checkcolumn: false},
+			// {name: 'Ales', region: 'Беларусь', skills: [4], salary: 7, datecolumn: getRandomDate(), checkcolumn: false},
+			// {name: 'Stas', region: 'Беларусь', skills: [4], salary: 8, datecolumn: getRandomDate(), checkcolumn: false},
+			// {name: 'Sergey', region: 'Россия', skills: [1], salary: 9, datecolumn: getRandomDate(), checkcolumn: false},
+			// {name: 'Kirill', region: 'Россия', skills: [1], salary: 10, datecolumn: getRandomDate(), checkcolumn: false},
+			// {name: 'Fillip', region: 'Беларусь', skills: [1], salary: 11, datecolumn: getRandomDate(), checkcolumn: false},
 		]
 	},
 
@@ -54,15 +58,15 @@ Ext.define('MyApp.view.main.List', {
 
 	requires: [
 		'Ext.button.Button',
-		'Ext.form.field.ComboBox',
 		'Ext.grid.column.Check',
 		'Ext.grid.column.Date',
 		'Ext.grid.column.Number',
 		'Ext.grid.filters.Filters',
-		'Ext.toolbar.Paging'
+		'Ext.toolbar.Paging',
+		'MyApp.view.main.MainModel'
 	],
 
-	reference: 'myGrid',
+	reference: 'usersGrid',
 	title: 'Table',
 
 	bind: {
@@ -87,7 +91,7 @@ Ext.define('MyApp.view.main.List', {
 			{
 				text: 'Редактировать',
 				bind: {
-					disabled: '{!myGrid.selection}',
+					disabled: '{!usersGrid.selection}',
 				},
 				handler: 'showEditModal'
 			},
@@ -95,7 +99,7 @@ Ext.define('MyApp.view.main.List', {
 				text: 'Удалить',
 				id: 'deleteButton',
 				bind: {
-					disabled: '{!myGrid.selection}',
+					disabled: '{!usersGrid.selection}',
 				},
 				handler: 'deleteItems'
 			}
@@ -122,9 +126,10 @@ Ext.define('MyApp.view.main.List', {
 				type: 'string'
 			}
 		}, {
-			text: 'Number',
+			text: 'salary',
 			xtype: 'numbercolumn',
-			dataIndex: 'numbercolumn',
+			format: '0',
+			dataIndex: 'salary',
 			filter: {
 				type: 'number'
 			}
@@ -151,8 +156,6 @@ Ext.define('MyApp.view.main.List', {
 			width: 100
 		}
 	],
-
-
 
 	bbar: {
 		xtype: 'pagingtoolbar',

@@ -2,29 +2,31 @@ Ext.define('MyApp.view.modalWindow.ModalWindowController', {
 	extend: 'Ext.app.ViewController',
 	alias: 'controller.modalWindow',
 
-	closeModal: function (thisWindow) {
-		console.log(thisWindow);
-		if (!thisWindow.isConfirmed) {
-			Ext.MessageBox.confirm('Confirmation', 'Are you sure you wish to close this window before saving your changes?', function (btn) {
-				if (btn === 'yes') {
-					thisWindow.isConfirmed = true;
-					thisWindow.close();
-				}
-			});
-			return false;
-		}
-	},
-
-	saveEditedData: function () {
+	saveData: function (btn) {
 		let vm = this.getViewModel();
-		// let selectedData = vm.get('selectedRow');
-		// let editedData = vm.get('editedRow');
-		// let time = Ext.Date.format(editedData['timecolumn'], 'g:i:s');
-		// let date = Ext.Date.format(editedData['datecolumn'], 'Y-m-d');
-		// let fullDate = new Date(`${date} ${time}`);
-		// selectedData.set('datecolumn', fullDate);
-		// selectedData.set('numbercolumn', editedData['numbercolumn']);
-		console.log(vm);
-		this.getView().close();
+		let form = btn.up('window').down('form');
+
+		if (form.getForm().isValid()) {
+			let record = form.getForm().getValues();
+			let store = vm.getStore('Users');
+			let selectedData = vm.get('selectedRow');
+			let time = record.timecolumn;
+			let date = record.datecolumn;
+			let fullDate = new Date(`${date} ${time}`);
+
+			if (!selectedData.get('id')) {
+				store.add(record);
+			}
+
+			for (let key in record) {
+				if (selectedData.getData().hasOwnProperty(key)) {
+					key === 'datecolumn' ? selectedData.set(key, fullDate) : selectedData.set(key, record[key]);
+				}
+			}
+			store.commitChanges();
+			this.getView().close();
+		} else if (!form.getForm().isValid()) {
+			Ext.Msg.alert('Ошибка заполнения', 'Имеются некорректно заполненные поля');
+		}
 	}
 });

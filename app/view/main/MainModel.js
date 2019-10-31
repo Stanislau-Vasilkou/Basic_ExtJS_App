@@ -13,6 +13,23 @@ Ext.define('MyApp.view.main.MainModel', {
 	stores: {
 		Users: {
 			type: 'users'
+		},
+		formulas: {
+			user: {
+				bind: {
+					bindTo: '{usersGrid.selection}',
+					deep: true
+				},
+				// get: function (record) {
+				// 	return record;
+				// },
+				// set: function (record) {
+				// 	if (!record.isModel) {
+				// 		record = this.get('Users').getById(record.id);
+				// 		this.set('user', record);
+				// 	}
+				// }
+			}
 		}
 	}
 });

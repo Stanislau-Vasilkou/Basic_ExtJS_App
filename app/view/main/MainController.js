@@ -3,32 +3,35 @@ Ext.define('MyApp.view.main.MainController', {
 	alias: 'controller.main',
 	stores: ['Users'],
 
-	showEditModal: function () {
+	showEditModal: function (button) {
 		let vm = this.getViewModel();
-		for(let key in vm.get('selectedRow').getData()) {
-			vm.set('editedRow.timecolumn', vm.get('selectedRow.datecolumn'));
-			vm.set(`editedRow.${key}`, vm.get(`selectedRow.${key}`));
-		}
+		let records = button.up('grid').getSelectionModel().getSelection();
+		let record = records[0];
+		let date = record.get('datecolumn');
+		record.set('timecolumn', date);
 		Ext.create({
 			xtype: 'modal',
-			viewModel: {
-				parent: vm
-			},
+			id:	'modal'
 		}).show();
+		let window = Ext.getCmp('modal');
+		let form = window.down('form');
+		form.getForm().setValues(record.data);
 	},
 
 	showAddModal: function () {
-		let vm = this.getViewModel();
 		Ext.create({
 			xtype: 'modal',
-			viewModel: {
-				parent: vm
-			},
+			id: 'modal'
 		}).show();
+		let window = Ext.getCmp('modal');
+		let form = window.down('form');
+		console.log(form.getForm().getValues());
+		console.log(form.getForm().getValues());
 	},
 
 	deleteItems: function () {
-		let store = this.getViewModel().getStore('Users');
+		let store = this.getStore('Users');
+		console.log(store);
 		let selectedRecord = this.getViewModel().get('selectedRow');
 		let data = store.getData().items;
 		let records = data.filter((i) => i.data.checkcolumn);

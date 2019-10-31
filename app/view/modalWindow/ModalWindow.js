@@ -24,82 +24,98 @@ Ext.define('MyApp.view.modalWindow.ModalWindow', {
 	extend: 'Ext.window.Window',
 	title: 'Modal window',
 	xtype: 'modal',
+
+	requires: [
+		'Ext.form.Panel'
+	],
 	controller: 'modalWindow',
-	width: 400,
+	width: 600,
 	height: 400,
 	modal: true,
-	items: [
-		{
-			xtype: 'textfield',
-			fieldLabel: 'name',
-			flex: 1,
-			allowBlank: false,
-			bind: {
-				value: '{editedRow.name}'
-			}
-		}, {
-			xtype: 'combobox',
-			fieldLabel: 'region',
-			valueField: 'abbr',
-			displayField: 'name',
-			queryMode: 'local',
-			store: regions,
-			allowBlank: false,
-			bind: {
-				value: '{editedRow.region}'
-			}
-		}, {
-			xtype: 'tagfield',
-			fieldLabel: 'skills',
-			anchor: '100%',
-			displayField: 'skill',
-			valueField: 'id',
-			store: skills,
-			allowBlank: false,
-			bind: {
-				value: '{editedRow.skills}'
-			},
-			convert: function () {
-
-			}
-		}, {
-			xtype: 'numberfield',
-			fieldLabel: '№',
-			hideTrigger: true,
-			allowBlank: false,
-			bind: {
-				value: '{editedRow.numbercolumn}'
-			}
-		}, {
-			xtype: 'container',
-			layout: {
-				type: 'hbox',
-			},
-			items: [{
-				xtype: 'datefield',
-				fieldLabel: 'date',
-				format: 'Y-m-d',
+	items: {
+		xtype: 'form',
+		id: 'customForm',
+		items: [
+			{
+				xtype: 'textfield',
+				fieldLabel: 'name',
+				name: 'name',
+				flex: 1,
 				allowBlank: false,
 				bind: {
-					value: '{editedRow.datecolumn}'
+					value: '{user.name}'
 				}
 			}, {
-				xtype: 'timefield',
-				fieldLabel: 'time',
-				format: 'g:i:s',
+				xtype: 'combobox',
+				fieldLabel: 'region',
+				name: 'region',
+				valueField: 'name',
+				displayField: 'name',
+				queryMode: 'local',
+				store: regions,
 				allowBlank: false,
 				bind: {
-					value: '{editedRow.timecolumn}'
+					value: '{user.region}'
 				}
-			}]
-		}, {
-			xtype: 'button',
-			text: 'Сохранить',
-			handler: 'saveEditedData'
-		}, {
-			xtype: 'button',
-			text: 'Закрыть',
-			handler: 'closeModal',
-		}
-	],
+			}, {
+				xtype: 'tagfield',
+				fieldLabel: 'skills',
+				name: 'skills',
+				anchor: '100%',
+				displayField: 'skill',
+				valueField: 'skill',
+				store: skills,
+				allowBlank: false,
+				bind: {
+					value: '{user.skills}'
+				},
+				convert: function () {
+
+				}
+			}, {
+				xtype: 'numberfield',
+				fieldLabel: 'salary',
+				name: 'salary',
+				hideTrigger: true,
+				format: '0',
+				allowBlank: false,
+				bind: {
+					value: '{user.salary}'
+				}
+			}, {
+				xtype: 'container',
+				layout: {
+					type: 'hbox',
+				},
+				items: [{
+					xtype: 'datefield',
+					name: 'datecolumn',
+					fieldLabel: 'date',
+					format: 'Y-m-d',
+					allowBlank: false,
+					bind: {
+						value: '{user.datecolumn}'
+					}
+				}, {
+					xtype: 'timefield',
+					name: 'timecolumn',
+					fieldLabel: 'time',
+					format: 'g:i:s',
+					allowBlank: false
+				}]
+			}, {
+				xtype: 'button',
+				text: 'Сохранить',
+				handler: 'saveData'
+			}, {
+				xtype: 'button',
+				text: 'Закрыть',
+				listeners: {
+					click: function() {
+
+					}
+				}
+			}
+		],
+	}
 });
