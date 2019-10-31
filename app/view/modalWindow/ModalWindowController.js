@@ -5,7 +5,6 @@ Ext.define('MyApp.view.modalWindow.ModalWindowController', {
 	saveData: function (btn) {
 		let vm = this.getViewModel();
 		let form = btn.up('window').down('form');
-
 		if (form.getForm().isValid()) {
 			let record = form.getForm().getValues();
 			let store = vm.getStore('Users');
@@ -13,20 +12,31 @@ Ext.define('MyApp.view.modalWindow.ModalWindowController', {
 			let time = record.timecolumn;
 			let date = record.datecolumn;
 			let fullDate = new Date(`${date} ${time}`);
-
-			if (!selectedData.get('id')) {
+			if (!selectedData) {
+				store.sort({
+					property: 'id',
+					direction: 'ASC'
+				});
+				let lastRecord = store.last();
+				record.id = lastRecord.data.id++;
+				record.datecolumn = fullDate;
 				store.add(record);
-			}
-
-			for (let key in record) {
-				if (selectedData.getData().hasOwnProperty(key)) {
-					key === 'datecolumn' ? selectedData.set(key, fullDate) : selectedData.set(key, record[key]);
+				store.commitChanges();
+			} else if (selectedData) {
+				for (let key in record) {
+					if (selectedData.getData().hasOwnProperty(key)) {
+						key === 'datecolumn' ? selectedData.set(key, fullDate) : selectedData.set(key, record[key]);
+					}
 				}
 			}
 			store.commitChanges();
-			this.getView().close();
+			this.getView().close()
 		} else if (!form.getForm().isValid()) {
 			Ext.Msg.alert('Ошибка заполнения', 'Имеются некорректно заполненные поля');
 		}
+	},
+
+	close: function () {
+		this.getView().close();
 	}
 });

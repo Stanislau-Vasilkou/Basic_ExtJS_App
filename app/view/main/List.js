@@ -4,7 +4,7 @@ function getRandomDate() {
 }
 
 function convertTag(val) {
-	return val.join(', ');
+	return val.isArray ? val.join(', ') : val;
 }
 
 Ext.define('User', {
@@ -13,7 +13,7 @@ Ext.define('User', {
 	fields: [
 		{name: 'name', type: 'string'},
 		{name: 'region', type: 'string'},
-		{name: 'skills', type: 'string', convert: convertTag},
+		{name: 'skills', convert: convertTag},
 		{name: 'salary', type: 'number'},
 		{name: 'datecolumn', type: 'date'},
 		{name: 'checkcolumn', type: 'boolean'}
@@ -124,7 +124,8 @@ Ext.define('MyApp.view.main.List', {
 			dataIndex: 'skills',
 			filter: {
 				type: 'string'
-			}
+			},
+			width: 200
 		}, {
 			text: 'salary',
 			xtype: 'numbercolumn',
@@ -153,7 +154,7 @@ Ext.define('MyApp.view.main.List', {
 			},
 			dataIndex: 'checkcolumn',
 			sortable: false,
-			width: 100
+			width: 50
 		}
 	],
 

@@ -29,9 +29,13 @@ Ext.define('MyApp.view.modalWindow.ModalWindow', {
 		'Ext.form.Panel'
 	],
 	controller: 'modalWindow',
-	width: 600,
-	height: 400,
+	// width: 600,
+	// height: 400,
 	modal: true,
+	padding: 10,
+	bbarCfg: {
+		buttonAlign: 'center'
+	},
 	items: {
 		xtype: 'form',
 		id: 'customForm',
@@ -103,19 +107,18 @@ Ext.define('MyApp.view.modalWindow.ModalWindow', {
 					format: 'g:i:s',
 					allowBlank: false
 				}]
-			}, {
-				xtype: 'button',
-				text: 'Сохранить',
-				handler: 'saveData'
-			}, {
-				xtype: 'button',
-				text: 'Закрыть',
-				listeners: {
-					click: function() {
-
-					}
-				}
 			}
 		],
-	}
+	},
+	bbar: [
+		{
+			xtype: 'button',
+			text: 'Сохранить',
+			handler: 'saveData'
+		}, {
+			xtype: 'button',
+			text: 'Закрыть',
+			handler: 'close'
+		}
+	]
 });
