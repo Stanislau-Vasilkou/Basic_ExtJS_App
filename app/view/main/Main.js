@@ -12,13 +12,28 @@ Ext.define('MyApp.view.main.Main', {
     requires: [
         'MyApp.view.main.MainController',
         'MyApp.view.main.MainModel',
-        'MyApp.view.main.List'
+        'MyApp.view.main.cars.CarsModel'
     ],
 
     controller: 'main',
     viewModel: 'main',
 
-    items: [{
-        xtype: 'mainlist'
-    }],
+    items: [
+        {
+        title: 'Users',
+        items: [{
+            xtype: 'mainlist',
+            reference:'usersGrid'
+        }]
+    }, 
+    {
+        title: 'Cars',
+        items: [{
+            xtype: 'carslist',
+            reference: 'carsGrid'
+        }]
+    }
+], 
+
+
 });

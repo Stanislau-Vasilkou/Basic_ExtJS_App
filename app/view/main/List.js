@@ -1,60 +1,12 @@
-function getRandomDate() {
-	let randomDate = new Date(+(new Date()) - Math.floor(Math.random() * 10000000000));
-	return randomDate;
-}
-
-function convertTag(val) {
-	return val.isArray ? val.join(', ') : val;
-}
-
-Ext.define('User', {
-	extend: 'Ext.data.Model',
-
-	fields: [
-		{name: 'name', type: 'string'},
-		{name: 'region', type: 'string'},
-		{name: 'skills', convert: convertTag},
-		{name: 'salary', type: 'number'},
-		{name: 'datecolumn', type: 'date'},
-		{name: 'checkcolumn', type: 'boolean'}
-	]
-});
-
-Ext.define('Users', {
-	extend: 'Ext.data.Store',
-	model: 'User',
-	alias: 'store.users',
-	pageSize: 5,
-	data: {
-		items: [
-			{name: 'Ivan', region: 'Россия', skills: ['.NET'], salary: 300, datecolumn: getRandomDate(), checkcolumn: false},
-			{name: 'Petr', region: 'Украина', skills: ['Java', '.NET'], salary: 200, datecolumn: getRandomDate(), checkcolumn: false},
-			{name: 'Fedor', region: 'Россия', skills: ['JavaScript', 'Swift'], salary: 350, datecolumn: getRandomDate(), checkcolumn: false},
-			{name: 'Michael', region: 'Россия', skills: ['JavaScript', 'Java'], salary: 400, datecolumn: getRandomDate(), checkcolumn: false},
-			// {name: 'Jan', region: 'Россия', skills: [1, 3], salary: 5, datecolumn: getRandomDate(), checkcolumn: false},
-			// {name: 'Alex', region: 'Беларусь', skills: [1, 3], salary: 6, datecolumn: getRandomDate(), checkcolumn: false},
-			// {name: 'Ales', region: 'Беларусь', skills: [4], salary: 7, datecolumn: getRandomDate(), checkcolumn: false},
-			// {name: 'Stas', region: 'Беларусь', skills: [4], salary: 8, datecolumn: getRandomDate(), checkcolumn: false},
-			// {name: 'Sergey', region: 'Россия', skills: [1], salary: 9, datecolumn: getRandomDate(), checkcolumn: false},
-			// {name: 'Kirill', region: 'Россия', skills: [1], salary: 10, datecolumn: getRandomDate(), checkcolumn: false},
-			// {name: 'Fillip', region: 'Беларусь', skills: [1], salary: 11, datecolumn: getRandomDate(), checkcolumn: false},
-		]
-	},
-
-	proxy: {
-		type: 'memory',
-		enablePaging: true,
-		autoLoad: true,
-		reader: {
-			type: 'json',
-			rootProperty: 'items'
-		}
-	}
-});
-
-Ext.define('MyApp.view.main.List', {
+Ext.define('List', {
 	extend: 'Ext.grid.Panel',
 	xtype: 'mainlist',
+	viewModel: {
+		type: 'main',
+		data: {
+			counter: 1
+		}
+	},
 
 	requires: [
 		'Ext.button.Button',
@@ -67,11 +19,11 @@ Ext.define('MyApp.view.main.List', {
 	],
 
 	reference: 'usersGrid',
-	title: 'Table',
 
 	bind: {
 		store: '{Users}',
-		selection: '{selectedRow}'
+		selection: '{selectedRow}',
+		title: '{counter}',
 	},
 
 
@@ -99,10 +51,10 @@ Ext.define('MyApp.view.main.List', {
 				text: 'Удалить',
 				id: 'deleteButton',
 				bind: {
-					disabled: '{!usersGrid.selection}',
+					disabled: '{counter}'
 				},
 				handler: 'deleteItems'
-			}
+			}, 
 		]
 	}],
 
@@ -146,11 +98,8 @@ Ext.define('MyApp.view.main.List', {
 		}, {
 			xtype: 'checkcolumn',
 			headerCheckbox: true,
-			reference: 'mycheck',
 			listeners: {
-				checkChange: function (context, rowIndex, checked) {
-					checked ? Ext.getCmp('deleteButton').setDisabled(false) : Ext.getCmp('deleteButton').setDisabled(true);
-				},
+				checkChange: 'onCheckChange'
 			},
 			dataIndex: 'checkcolumn',
 			sortable: false,
@@ -160,6 +109,10 @@ Ext.define('MyApp.view.main.List', {
 
 	bbar: {
 		xtype: 'pagingtoolbar',
-		displayInfo: true
+		displayInfo: true,
+		displayMsg: 'Displaying {0} - {1} of {2}',
+		bind:{
+			store: '{Users}'
+		}
 	}
 });

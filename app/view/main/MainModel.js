@@ -1,6 +1,41 @@
 /**
  * This class is the view model for the Main view of the application.
  */
+function convertTag(val) {
+	return val.isArray ? val.join(', ') : val;
+}
+
+Ext.define('User', {
+	extend: 'Ext.data.Model',
+
+	fields: [
+		{name: 'name', type: 'string'},
+		{name: 'region', type: 'string'},
+		{name: 'skills', convert: convertTag},
+		{name: 'salary', type: 'number'},
+		{name: 'datecolumn', type: 'date'},
+		{name: 'checkcolumn', type: 'boolean'}
+	]
+});
+
+Ext.define('Users', {
+	extend: 'Ext.data.Store',
+	model: 'User',
+	alias: 'store.users',
+	pageSize: 5,
+	autoLoad: true,
+	// autoSync: true,
+	proxy: {
+		type: 'ajax',
+		url: 'http://localhost:3000/users',
+		enablePaging: true,
+		reader: {
+			type: 'json',
+			rootProperty: 'data'
+		}
+	}
+});
+
 Ext.define('MyApp.view.main.MainModel', {
 	extend: 'Ext.app.ViewModel',
 
@@ -13,23 +48,6 @@ Ext.define('MyApp.view.main.MainModel', {
 	stores: {
 		Users: {
 			type: 'users'
-		},
-		formulas: {
-			user: {
-				bind: {
-					bindTo: '{usersGrid.selection}',
-					deep: true
-				},
-				// get: function (record) {
-				// 	return record;
-				// },
-				// set: function (record) {
-				// 	if (!record.isModel) {
-				// 		record = this.get('Users').getById(record.id);
-				// 		this.set('user', record);
-				// 	}
-				// }
-			}
 		}
-	}
+	},
 });

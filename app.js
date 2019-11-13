@@ -2,6 +2,12 @@
  * This file launches the application by asking Ext JS to create
  * and launch() the Application class.
  */
+Ext.Loader.setConfig({
+    paths: {        
+        'Overrides': 'overrides'
+    }
+});
+
 Ext.application({
     extend: 'MyApp.Application',
 

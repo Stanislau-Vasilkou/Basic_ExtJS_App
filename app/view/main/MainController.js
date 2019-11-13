@@ -2,6 +2,7 @@ Ext.define('MyApp.view.main.MainController', {
 	extend: 'Ext.app.ViewController',
 	alias: 'controller.main',
 	stores: ['Users'],
+	counter: 0,
 
 	showEditModal: function (button) {
 		let vm = this.getViewModel();
@@ -39,4 +40,10 @@ Ext.define('MyApp.view.main.MainController', {
 			}
 		});
 	},
+
+	onCheckChange: function(context, rowIndex, checked) {
+		checked ? this.counter++ : this.counter--;
+		this.getViewModel().set('title', this.counter)
+		console.log(this.getViewModel().get('title'));
+	}
 });
