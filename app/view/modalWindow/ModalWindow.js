@@ -26,6 +26,12 @@ Ext.define('MyApp.view.modalWindow.ModalWindow', {
 	title: 'Modal window',
 	xtype: 'modal',
 	controller: 'modalWindow',
+	viewModel: {
+		type: 'main',
+		data: {
+			Id: null
+		}
+	},
 	modal: true,
 	padding: 10,
 	items: [

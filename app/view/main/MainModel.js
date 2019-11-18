@@ -7,8 +7,9 @@ function convertTag(val) {
 
 Ext.define('User', {
 	extend: 'Ext.data.Model',
-
+	idProperty: 'Id',
 	fields: [
+		{name: 'Id', type: 'int'},
 		{name: 'name', type: 'string'},
 		{name: 'region', type: 'string'},
 		{name: 'skills', convert: convertTag},
@@ -24,15 +25,22 @@ Ext.define('Users', {
 	alias: 'store.users',
 	pageSize: 5,
 	autoLoad: true,
-	// autoSync: true,
+	autoSync: true,
 	proxy: {
 		type: 'ajax',
 		url: 'http://localhost:3000/users',
 		enablePaging: true,
 		reader: {
 			type: 'json',
-			rootProperty: 'data'
-		}
+			rootProperty: 'data',
+			totalProperty: 'totalCount'
+		},
+	// 	api: {
+	// 		// create: 'country/create',
+	// 		read: 'http://localhost:3000/users',
+	// 		// update: 'counrtry/update',
+	// 		destroy: 'http://localhost:3000/users/destroy'
+	// 	},
 	}
 });
 

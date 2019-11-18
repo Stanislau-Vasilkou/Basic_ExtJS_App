@@ -1,0 +1,19 @@
+[
+        {"Id": 1, "name": "Ivan", "region": "Россия", "skills": [".NET"], "salary": 300, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 2, "name": "Petr", "region": "Украина", "skills": ["Java", ".NET"], "salary": 200, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 3, "name": "Fedor", "region": "Россия", "skills": ["JavaScript", "Swift"], "salary": 350, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 4, "name": "Michael", "region": "Россия", "skills": ["JavaScript", "Java"], "salary": 400, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 5, "name": "John", "region": "Россия", "skills": [".NET"], "salary": 300, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 6, "name": "Alex", "region": "Украина", "skills": ["Java", ".NET"], "salary": 240, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 7, "name": "Fedor", "region": "Россия", "skills": ["JavaScript", "Swift"], "salary": 1350, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 8, "name": "Mitch", "region": "Россия", "skills": ["JavaScript", "Java"], "salary": 1400, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 9, "name": "Jho", "region": "Россия", "skills": [".NET"], "salary": 300, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 10, "name": "Brus", "region": "Украина", "skills": ["Java", ".NET"], "salary": 2100, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 11, "name": "Fedor", "region": "Россия", "skills": ["JavaScript", "Swift"], "salary": 350, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 12,"name": "Sam", "region": "Россия", "skills": ["Java"], "salary": 4000, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 13,"name": "El", "region": "Россия", "skills": ["Java"], "salary": 500, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 14,"name": "Stas", "region": "Россия", "skills": ["Java"], "salary": 3400, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 15,"name": "Denis", "region": "Россия", "skills": ["Java"], "salary": 300, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 16,"name": "Artem", "region": "Россия", "skills": ["Java"], "salary": 400, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false},
+        {"Id": 17,"name": "Nicolya", "region": "Россия", "skills": ["Java"], "salary": 1400, "datecolumn": "2019-11-11T08:58:57.073Z", "checkcolumn": false}
+    ]

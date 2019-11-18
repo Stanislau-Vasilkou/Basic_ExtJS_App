@@ -5,3 +5,4 @@ modern.json
 /ext
 .idea
 .sencha
+/server/node_modules

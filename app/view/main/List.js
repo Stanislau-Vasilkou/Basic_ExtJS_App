@@ -1,10 +1,11 @@
 Ext.define('List', {
 	extend: 'Ext.grid.Panel',
 	xtype: 'mainlist',
+	controller: 'main',
 	viewModel: {
 		type: 'main',
 		data: {
-			counter: 1
+			counter: 0
 		}
 	},
 
@@ -23,7 +24,6 @@ Ext.define('List', {
 	bind: {
 		store: '{Users}',
 		selection: '{selectedRow}',
-		title: '{counter}',
 	},
 
 
@@ -51,7 +51,7 @@ Ext.define('List', {
 				text: 'Удалить',
 				id: 'deleteButton',
 				bind: {
-					disabled: '{counter}'
+					disabled: '{!counter && !usersGrid.selection}'
 				},
 				handler: 'deleteItems'
 			}, 
@@ -60,6 +60,10 @@ Ext.define('List', {
 
 	columns: [
 		{
+			text: 'Id',
+			dataIndex: 'Id',
+			width: 45
+		},  {
 			text: 'name',
 			dataIndex: 'name',
 			filter: {
@@ -99,13 +103,17 @@ Ext.define('List', {
 			xtype: 'checkcolumn',
 			headerCheckbox: true,
 			listeners: {
-				checkChange: 'onCheckChange'
+				checkChange: 'onCheckChange',
 			},
 			dataIndex: 'checkcolumn',
 			sortable: false,
 			width: 50
 		}
 	],
+
+	// listeners: {
+	// 	headerClick: 'onHeaderClick'
+	// },
 
 	bbar: {
 		xtype: 'pagingtoolbar',
